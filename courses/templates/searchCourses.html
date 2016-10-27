@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block main-content-area %}
+
+    <section>
+
+        <form action="" method="get">
+            <input type="text" name="q" value="" placeholder="Search...">
+            <input type="submit" value="Search" />
+        </form>
+
+        {% if not noSearch %}
+
+            <br><br>
+
+            {% for result in results %}
+                <div style="background-color:#ddd;padding:10px;margin-bottom:15px">
+                    <strong>{{result.title}}</strong>
+                    <br>
+                    <span>{{result.description | truncatewords:40}}</span><br>
+                    <a href="{{result.url}}" target="_blank">{{result.url}}</a><br>
+                    <span>{{result.level}}</span>
+                </div>
+
+            {% empty %}
+                <strong>No results.</strong>
+
+            {% endfor %}
+
+        {% endfor %}
+
+    </section>
+
+{% endblock %}

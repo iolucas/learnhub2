@@ -1,0 +1,96 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>      
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  
+        <title>LearnHub</title>
+        <style>
+
+            html, body {
+                margin: 0;
+                height: 100%;
+                font-family: 'Calibri'
+            }
+
+            header {
+                background-color: #006064;
+                color: #84ffff;
+                height: 80px;
+                line-height: 80px;
+            }
+
+            header a {
+                color: #84ffff;
+                text-decoration: none;       
+            }
+
+            .user-area {
+                background-color: #aaa;
+                height: 50px;
+                line-height: 50px;
+                padding: 5px;
+                text-align: center;
+            }
+
+            .user-area a {
+                color: #111;
+                font-size: 30px;
+            }
+
+            #logo {
+                font-size: 30px;
+                margin-left: 20px;
+            }
+
+            #user {
+                font-size: 20px;
+                margin-right: 20px;
+                float: right;
+            }
+
+            #user a {
+                color: inherit;
+            }
+
+            section {
+                font-size: 20px;
+                padding: 10px;
+            }
+
+            .subject-reference {
+                background-color: #ddd;
+                padding-left: 5px;
+                margin: 5px;
+            }
+
+            .float-left {
+                float: left;
+            }
+
+            .float-right {
+                float: right;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <span id="logo">LearnHub</span>
+        </header>
+
+        {% block main-content-area %}
+        {% endblock %}
+
+    </body>
+
+
+</html>

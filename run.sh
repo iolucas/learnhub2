@@ -20,4 +20,4 @@ python manage.py collectstatic
 #NOT APPLICACABLE NOW DUE TO LOW DATABASE PRIORITIES
 
 echo [$0] Starting application on gunicorn server...
-gunicorn navigatte.wsgi --workers 3 --bind 0.0.0.0:$PORT
+gunicorn learnhub2.wsgi --workers 3 --bind 0.0.0.0:$PORT

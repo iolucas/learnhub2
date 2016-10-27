@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main-content-area %}
+
+    <table>
+    {% for row in courses %}
+        <tr>
+            {% for data in row %}
+                <td>{{data}}</td>
+            {% endfor %}
+        </tr>
+
+
+    {% endfor %}
+    </table>
+
+{% endblock %}
