@@ -5,10 +5,10 @@ from django.db import models
 #General topic that handles topics to be used by the users
 class Course(models.Model):
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=500)
     description = models.TextField()
-    url = models.CharField(max_length=200, unique=True)
-    thumbnailUrl = models.CharField(max_length=200)
+    url = models.CharField(max_length=500, unique=True)
+    thumbnailUrl = models.CharField(max_length=500)
     level = models.CharField(max_length=200, blank=True)
 
     #url = models.URLField(unique=True)

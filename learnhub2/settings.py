@@ -22,16 +22,23 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['LEARNHUB_SECRET_KEY']
 
+#Switchs production mode
+if "BLUEMIX_REGION" in os.environ:
+    PRODUCTION_MODE = True
+else:
+    PRODUCTION_MODE = False
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 #If we are in production env
-if "BLUEMIX_REGION" in os.environ:
+if PRODUCTION_MODE:
     DEBUG = False
 else: #non production env
     DEBUG = True
 
 
 #If we are in production env
-if "BLUEMIX_REGION" in os.environ:
+if PRODUCTION_MODE and False:
     ALLOWED_HOSTS = ["learnhub2.mybluemix.net"]
 else: #non production env
     ALLOWED_HOSTS = ["*"]
@@ -39,9 +46,9 @@ else: #non production env
 #Security stuff
 
 #If we are in production env
-if "BLUEMIX_REGION" in os.environ:
+if PRODUCTION_MODE:
 
-    SECUREFLAG = True
+    SECUREFLAG = False
     
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -106,7 +113,7 @@ WSGI_APPLICATION = 'learnhub2.wsgi.application'
 import dj_database_url
 
 #If we are in production env
-if "BLUEMIX_REGION" in os.environ:
+if PRODUCTION_MODE:
     DATABASES = {'default': dj_database_url.config()}
 else: #non production env
     DATABASES = {
@@ -155,7 +162,7 @@ USE_TZ = True
 
 #Static file directory inclusion
 #If we are in production env
-if "BLUEMIX_REGION" in os.environ:
+if PRODUCTION_MODE:
     #Serve static files in the root static folder
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 else: #non production env

@@ -15,6 +15,18 @@ def coursesIndex(request):
     return HttpResponse("Oi")
 
 
+improve a little the search stuff and add the rest of the material
+
+#Debug view to get request ip
+def getIp(request):
+
+    response = 'HTTP_X_FORWARDED_FOR: ' + str(request.META.get('HTTP_X_FORWARDED_FOR'))
+    response += "<br><br>"
+    response += 'REMOTE_ADDR: ' + str(request.META.get('REMOTE_ADDR'))
+
+    return HttpResponse(response)
+
+
 def searchCourses(request):
 
     #If there is no query in search and it is valid, just return the search modal
@@ -23,8 +35,9 @@ def searchCourses(request):
             'noSearch': True
         })
 
+    #If there is a query, get the titles that contains the query (case insensitive)
     return render(request, "searchCourses.html", {
-        'results': Course.objects.filter(title__contains=request.GET['q'])
+        'results': Course.objects.filter(title__icontains=request.GET['q'])
     })
 
 
@@ -43,11 +56,16 @@ def loadCourses(request):
 
 
     #Load upload file as string
-    courseData = request.FILES["course_file"].read().decode(encoding='UTF-8',errors='ignore')
+    courseData = request.FILES["course_file"].read().decode('utf-8', 'replace')
+
+    #return HttpResponse(courseData)
 
     #Load data in a csv module
     csvData = csv.reader(courseData.split("\n"))
 
+    # return render(request, "coursesDebug.html", {
+    #      'courses': csvData
+    # })
 
     #Iterate thru csv data and create courses
     #Create artifact to skip the first line (header)
