@@ -4,7 +4,11 @@ from django.http import HttpResponse, Http404
 
 from .models import Course
 
+from urllib.parse import quote
+
 import csv
+
+import math
 
 
 #from django.contrib.auth.decorators import login_required
@@ -15,7 +19,7 @@ def coursesIndex(request):
     return HttpResponse("Oi")
 
 
-improve a little the search stuff and add the rest of the material
+#improve a little the search stuff and add the rest of the material
 
 #Debug view to get request ip
 def getIp(request):
@@ -35,9 +39,55 @@ def searchCourses(request):
             'noSearch': True
         })
 
+    resultsPerPage = 10
+    numberOfPagination = 7
+
+    if "page" in request.GET:
+        try:
+            currentPage = int(request.GET["page"])
+        except:
+            return HttpResponse("Invalid page.")
+    else:
+        currentPage = 1
+        
+    #Execute query search
+    queryResult = Course.objects.filter(title__icontains=request.GET['q'])
+
+
+    #Get pagination values
+
+    #Get number of pages
+    numberOfPages = math.ceil(len(queryResult) / resultsPerPage)
+
+    pagesRange = range(1, numberOfPages + 1)
+
+    # startPageRange = currentPage - math.floor(numberOfPagination/2)
+
+    # if startPageRange < 1:
+    #     startPageRange = 1
+
+    # endPageRange = startPageRange + numberOfPagination
+
+    # #If we are close to the last page
+    # if endPageRange > numberOfPages:
+    #     endPageRange = numberOfPages + 1 #Set the last page 
+    #     startPageRange = endPageRange - numberOfPagination #Update the first page
+
+
+    # print(len(queryResult))
+    # print(resultsPerPage)
+    # print(numberOfPages)
+
+
+    startResultRange = (currentPage - 1) * resultsPerPage
+    endResultRange = startResultRange + resultsPerPage
+
     #If there is a query, get the titles that contains the query (case insensitive)
     return render(request, "searchCourses.html", {
-        'results': Course.objects.filter(title__icontains=request.GET['q'])
+        'results': queryResult[startResultRange:endResultRange],
+        'currentPage': currentPage,
+        'pages': pagesRange,
+        'currentQuery': quote(request.GET['q'])
     })
 
 

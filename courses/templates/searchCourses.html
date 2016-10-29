@@ -27,7 +27,26 @@
 
             {% endfor %}
 
+            <br>
+            <div style="text-align:center;">
+                {% for page in pages %}
+                
+                    <span style="margin:0 25px 0 25px;">   
+                        {% if page != currentPage %}
+                            <a href="{% url 'search_courses' %}?q={{currentQuery}}&page={{page}}">{{page}}</a>
+                        {% else %}
+                            {{page}}
+                        {% endif %}
+                    </span>
+                    
+                {% endfor %}
+            </div>
+            <br>
+            <br>
+
         {% endif %}
+
+        
 
     </section>
 
