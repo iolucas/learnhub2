@@ -10,7 +10,18 @@ echo [$0] Making database migrations...
 python manage.py makemigrations
 python manage.py migrate
 
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('lucas', 'email@email.com', 'pass')" | python manage.py shell
+#echo "from django.contrib.auth.models import User; User.objects.create_superuser('lucas', 'email@email.com', 'pass')" | python manage.py shell
+
+# echo [$0] Loading data to database...
+
+# python manage.py loaddata course0.json
+# python manage.py loaddata course1.json
+# python manage.py loaddata course2.json
+# python manage.py loaddata course3.json
+# python manage.py loaddata course4.json
+# python manage.py loaddata course5.json
+# python manage.py loaddata course6.json
+# python manage.py loaddata course7.json
 
 echo [$0] Collecting static files to the root folder...
 python manage.py collectstatic

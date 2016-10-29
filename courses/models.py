@@ -7,7 +7,7 @@ class Course(models.Model):
 
     title = models.CharField(max_length=500)
     description = models.TextField()
-    url = models.CharField(max_length=500, unique=True)
+    url = models.CharField(max_length=500)
     thumbnailUrl = models.CharField(max_length=500)
     level = models.CharField(max_length=200, blank=True)
 
@@ -18,3 +18,6 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+    # class Meta:
+    #     unique_together = ('title', 'url')
