@@ -20,13 +20,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['LEARNHUB_SECRET_KEY']
+
 
 #Switchs production mode
 if "BLUEMIX_REGION" in os.environ:
     PRODUCTION_MODE = True
 else:
     PRODUCTION_MODE = False
+
+if PRODUCTION_MODE:
+    SECRET_KEY = os.environ['LEARNHUB_SECRET_KEY']
+else:
+    SECRET_KEY = "lucas"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
